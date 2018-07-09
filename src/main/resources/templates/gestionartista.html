@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>MUSIFY - Gestion de Artista</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	
+	<div style="float:right"><a href="#" th:href="@{/login/artistdetail/volver}">
+									<button type="button" >
+										<img src="/imgs/return.png" height="42" width="42" />
+									</button>
+								</a></div>
+	
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-9">
+				<p> Bienvenido <span th:text="${user.name}"></span></p>
+				<p th:if="${user.rol} == 1"> (Administrador)</p>
+				<p th:if="${user.rol} == 2"> (Usuario)</p>
+				<h1>
+					Gestion de Artista:
+					<h2 th:text="${artist.name}"></h2> 
+					
+				</h1>
+				<h2 style="text-align:center">Colaboradores</h2>
+				<table class="display" style="table-layout: fixed;width: 2400px">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Año</th>
+							<th></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="collaborator : ${collaborators}">
+							<td th:text="${collaborator.name}" style="text-align:center;width: 1200px;"></td>
+							<td th:text="${collaborator.year}" style="text-align:center;width: 600px;"></td>
+							<td><a href="#" th:href="@{/login/artistdetail/removecollab?id=__${artist.id}__&collabid=__${collaborator.id}__}">
+									<button type="button" >
+										<img src="/imgs/remove.ico" title="Eliminar Colaborador" />
+									</button>
+								</a>
+							</td>
+						</tr>
+					<tfoot>
+						<tr>
+							<th>Nombre</th>
+							<th>Año</th>
+							<th></th>
+
+						</tr>
+					</tfoot>
+				</table>
+				
+				<h2 style="text-align:center">No Colaboradores</h2>
+				<table class="display" style="table-layout: fixed;width: 2400px;">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Año</th>
+							<th></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="noncollaborator : ${noncollaborators}">
+							<td th:text="${noncollaborator.name}" style="text-align:center;width: 1200px;"></td>
+							<td th:text="${noncollaborator.year}" style="text-align:center;width: 600px;"></td>
+							<td><a href="#" th:href="@{/login/artistdetail/addcollab?id=__${artist.id}__&collabid=__${noncollaborator.id}__}">
+									<button type="button" >
+										<img src="/imgs/add.png" title="Añadir Colaborador" />
+									</button>
+								</a>
+							</td>
+						</tr>
+					<tfoot>
+						<tr>
+							<th>Nombre</th>
+							<th>Año</th>
+							<th></th>
+
+						</tr>
+					</tfoot>
+				</table>
+				
+				
+
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
+</html>

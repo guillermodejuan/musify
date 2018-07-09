@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Registro Nuevo Usuario - MUSIFY</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Registro Nuevo Usuario - MUSIFY</h1>
+			<br />
+			<form action="#" th:action="@{/registersubmit}" th:object="${user}"
+				method="post">
+				Email: <input type="email" class="form-control" th:field=*{name}></input>
+				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> No ha introducido un email válido </p>
+				<br /> 
+				Password: <input type="password" class="form-control" th:field=*{password} max="16"></input> 
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> No ha introducido un email válido </p>
+				<br />
+				Año de Nacimiento: <input type="number" min="1900" class="form-control" th:field=*{year}></input> 
+				<p th:if="${#fields.hasErrors('year')}" th:errors="*{year}"> El año introducido no es válido </p>
+				<br /> <br />
+				<button class="btn btn-lg btn-primary btn-block" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					Registrarse
+				</button>
+				
+			</form>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" onclick=" location.href='/../' ">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						Volver
+			</button>
+			
+		</div>
+	</div>
+
+</body>
+</html>

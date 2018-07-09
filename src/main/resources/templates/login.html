@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8"/>
+
+  <title>Acceso a MUSIFY</title>
+
+  <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+
+
+  <div class="login-card">
+    <h1>Acceso a MUSIFY<img class="candado"  src="/imgs/candado.png"></h1><br>
+  <p th:if="${newuser != null}" th:text="${newuser}" style="color:red"></p>
+  <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+    <input type="text" name="user" placeholder="Username" th:field=*{name}>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    <input type="password" name="pass" placeholder="Password" th:field=*{password}>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+    <input type="submit" name="login" class="login login-submit" value="Acceder">
+  </form>
+
+  <div class="login-help">
+    <a href="/register">Registrarse</a>
+  </div>
+  
+</div>
+
+
+</body>
+
+</html>

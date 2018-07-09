@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bienvenido a MUSIFY</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
+	<div style="float:right"><a href="#" th:href="@{/}">
+									<button type="button" >
+										<img src="/imgs/logout.png" height="42" width="42" />
+									</button>
+								</a></div>
+	
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-9">
+				<p> Bienvenido <span th:text="${user.name}"></span></p>
+				<p th:if="${user.rol} == 1"> (Administrador)</p>
+				<p th:if="${user.rol} == 2"> (Usuario)</p>
+				<h1>
+					Listado de Artistas
+					<div class="input-group">
+					<form action="#" th:action="@{/login/style}" method="post">
+						<select name="style">
+							<option th:each="style : ${styles}" th:text="${style.name}"></option>
+						</select> 
+						<span class="input-group-btn">
+							<input class="btn btn-default" type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
+					</div>
+				</h1>
+				<table id="customer" style="width: 100%">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Año</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="artist : ${artists}" >
+							
+							<td th:text="${artist.name}" style="text-align:center"></td>
+							<td th:text="${artist.year}" style="text-align:center"></td>
+							<td th:if="${user.rol} == ${T(com.gudejuan.musify.util.Constantes).ROL_ADMINISTRADOR}">
+								<a href="#" th:href="@{/login/artistdetail?id=__${artist.id}__}">
+									<button type="button" >
+										<img src="/imgs/edit.gif" title="Ver Colaboradores" />
+									</button>
+								</a>
+							</td>
+						</tr>
+					<tfoot>
+						<tr>
+							<th>Nombre</th>
+							<th>Año</th>
+							<th></th>
+						</tr>
+					</tfoot>
+				</table>
+				<div style="text-align:center" th:if="${user.rol} == ${T(com.gudejuan.musify.util.Constantes).ROL_ADMINISTRADOR}">
+				
+					<h1> Añadir nuevo artista</h1>
+					
+					<form action="#" th:action="@{/login/addartist}" th:object="${artist}" method="post">
+					<table style="margin: 0 auto;">
+						<tr><td>Nombre:</td><td><input type="text" class="form-control" th:field=*{name} pattern=".{3,}" required title="3 carácteres como mínimo"></input></td></tr>
+						<tr><td>Año de Nacimiento:</td><td><input type="number" min="1500" th:value="1500" class="form-control" th:field=*{year}></input></td></tr>
+						<tr><td colspan="2"> <label style="display: block;padding-left: 15px;text-indent: -15px;" th:each="style : ${styles}"><input th:if="${style.name} != ${T(com.gudejuan.musify.util.Constantes).STYLE_NULL}" style="width: 13px;height: 13px;padding: 0;margin:0;vertical-align:bottom;position:relative;top:-1px;*overflow: hidden;" type="checkbox" name="style" th:text="${style.name}" th:value="${style.id}"></input></label></td></tr>
+						<tr><td colspan="2"><button class="btn btn-lg btn-primary btn-block" type="submit">
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							Añadir
+						</button></td></tr>
+					</table>
+					</form>
+				</div>
+				
+
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+
+</body>
+<!--  
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/style.css" media="screen"
+	type="text/css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+-->
+</html>
+
